@@ -1,0 +1,58 @@
+<Window x:Class="CRUDLiblaryWPF.Windows.SelectMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:CRUDLiblaryWPF.Windows"
+        mc:Ignorable="d"
+        Title="Выбор Книг" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Text="Доступные книги:" Margin="10" FontSize="16" Grid.Row="0" Grid.Column="0"/>
+        <TextBlock Text="Информация о книге:" Margin="10" FontSize="16" Grid.Row="0" Grid.Column="1"/>
+        
+        <CheckBox Grid.Row="0" Grid.Column="1" x:Name="IsFavoriteCheckBox" HorizontalAlignment="Right" Margin="10" Width="120" Height="20" Content="избранные книги" Click="favoritesBtn_OnClick"/>
+        
+        <Grid Grid.Column="0" Grid.Row="1">
+            <DataGrid x:Name="BooksList" AutoGenerateColumns="False" Margin="10" CanUserResizeRows="False" CanUserResizeColumns="False" SelectionChanged="BookList_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Title}" Width="*" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Margin="15" Name="BookInfo" Text="Выберите книгу из списка" TextWrapping="Wrap" FontSize="14"/>
+       
+            <Border Grid.Row="1" Margin="10" BorderThickness="1" BorderBrush="Black">
+                <TextBlock Name="BookText" TextWrapping="Wrap" FontSize="14"/>
+            </Border>
+        </Grid>
+
+        <!-- Новая внутренняя сетка для кнопок -->
+        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Добавить книгу" x:Name="AddBookBtn" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" Grid.Column="0" Click="AddBookBtn_OnClick"/>
+            <Button Content="Удалить книгу" x:Name="DeleteBookBtn" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" Grid.Column="1" Click="DeleteBookBtn_OnClick"/>
+            <Button Content="Добавить в избранное" x:Name="AddToFavoriteBtn" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" Grid.Column="2" Click="AddInFavoritesBtn_OnClick"/>
+        </Grid>
+    </Grid>
+</Window>
